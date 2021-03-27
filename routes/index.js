@@ -1,17 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
-/*
-const nomeDaRota = require("caminhoParaFile");
-
-router.use(nomeDaRota)
-      .use(nomeDaRota)
-*/
-
 const homeRoute = require("./homeRoute");
+const estimateRoute = require('../routes/estimateRoute');
 const studentRoute = require("./studentRoute");
 
 router.use(homeRoute)
-router.use(studentRoute)
+      .use(estimateRoute)
+      .use(studentRoute)
 
 module.exports = router;
