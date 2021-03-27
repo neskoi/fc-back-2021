@@ -1,14 +1,13 @@
-const db = require('../repository/db');
+const db = require('./db');
 
-class estimateRepository{
+class EstimateRepository{
     async select(what){
         await db('orcamentos').where('');
     }
 
     async create(data){
        await db('orcamento').insert(data);
-       console.log(data);
     }
 }
 
-module.exports = new estimateRepository();
+module.exports = new EstimateRepository();

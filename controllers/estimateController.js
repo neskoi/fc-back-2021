@@ -1,9 +1,9 @@
 const estimateService = require('../services/estimateService');
 
-class estimateController {
+class EstimateController {
     async create(req, res){
        estimateService.create(req, res);
     }
 } 
 
-module.exports = new estimateController();
+module.exports = new EstimateController();

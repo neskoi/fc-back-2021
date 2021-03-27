@@ -1,9 +1,11 @@
-const estimateRepository = require('../repository/estiamateRepository');
+const estimateRepository = require('../repository/estimateRepository');
+const dateManager = require('../utils/dateManager');
 
-class estimateService {
+class EstimateService {
     async create (req, res){
-        estimateRepository.create({...req.body, img_orcamento_url: req.file.path});
+       await estimateRepository.create({...req.body, img_orcamento_url: req.file.path,data_orcamento: dateManager.dateForDB()});
+        console.log(dateManager.dateForDB());
     }
 }
 
-module.exports = new estimateService();
+module.exports = new EstimateService();
