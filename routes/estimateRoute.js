@@ -1,9 +1,11 @@
 const express = require('express');
-const MAX_SIZE = 500000;
-const multer = require('multer')({ dest: 'public/uploads/', limits: { fileSize: MAX_SIZE } });
-const estimateController = require('../controllers/estimateController');
+const multer = require('../config/multer');
 const router = express.Router();
+const estimateController = require('../controllers/estimateController');
 
-router.post('/solicitar',  multer.single('proof'), estimateController.create);
+router.post('/orcamento-inserir',  multer.single('estimate'), estimateController.create);
+router.get('/orcamento:id', estimateController.showOne);
+router.get('/orcamento-todos-unpaid', estimateController.showAllUnpaid);
+router.post('/orcamento-comprovar:id', multer.single('proof'), estimateController.puchaseProofInsertion);
 
 module.exports = router;
