@@ -13,8 +13,8 @@ class EstimateController {
         estimateService.showAllUnpaid(req, res);
     }
 
-    puchaseProofInsertion = async (req, res) => {
-        estimateService.puchaseProofInsertion(req, res);
+    purchaseProofInsertion = async (req, res) => {
+        estimateService.purchaseProofInsertion(req, res);
     }
 } 
 

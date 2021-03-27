@@ -26,7 +26,7 @@ class EstimateRepository{
         }
     }
 
-    puchaseProofInsertion = async (id, data) => {
+    purchaseProofInsertion = async (id, data) => {
         
         try {
             return await this.updateEstimate(id, data);
