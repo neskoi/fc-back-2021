@@ -9,6 +9,9 @@ router.use(nomeDaRota)
 */
 
 const homeRoute = require("./homeRoute");
+const studentRoute = require("./studentRoute");
+
 router.use(homeRoute)
+router.use(studentRoute)
 
 module.exports = router;
