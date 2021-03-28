@@ -17,8 +17,8 @@ class EstimateService {
         res.json(response);
     };
 
-    puchaseProofInsertion = async (req, res) => {
-        const response = await estimateRepository.puchaseProofInsertion(req.params.id, {img_nota_url: req.file.path, data_nota: dateManager.dateForDB()});
+    purchaseProofInsertion = async (req, res) => {
+        const response = await estimateRepository.purchaseProofInsertion(req.params.id, {img_nota_url: req.file.path, data_nota: dateManager.dateForDB()});
         res.json(response);
     };
 
