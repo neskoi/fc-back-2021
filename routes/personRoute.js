@@ -7,8 +7,13 @@ router.post(
     '/pessoa',
     (req, res) => {
       const dataPessoa = req.body
-      personController.cadastrarPessoa(dataPessoa)
-      res.json({"usuario":"Sucesso!"})
+      personController.cadastrarPessoa(dataPessoa).then(result => {
+        if (result === true) {
+          res.status(200).json({"usuario":"Sucesso!"})
+        } else {
+          res.status(400).json({"usuario":"Falha, Dados incorretos!"})
+        }
+      })
     },
   );
   

@@ -10,8 +10,10 @@ router.use(nomeDaRota)
 
 const homeRoute = require("./homeRoute");
 const userRoute = require("./userRoute");
+const personRoute = require("./personRoute");
 
 router.use(homeRoute)
 router.use(userRoute)
+router.use(personRoute)
 
 module.exports = router;

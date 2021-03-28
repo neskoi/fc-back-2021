@@ -11,23 +11,3 @@ async function buscarBanco() {
       return []
     }
   }
-  buscarBanco()
-
-  const data = [
-    {
-      nome: 'Itau',
-    },
-    {
-      nome: 'Caixa'
-    }
-  ]
-
-  async function cadastrarBanco() {
-    try{
-      const insert = await knexfile('banco').insert(data)
-      console.log('insert', insert)
-    } catch (e) {
-      console.log('insert erro', e.message)
-    }
-  }
-//cadastrarBanco()
