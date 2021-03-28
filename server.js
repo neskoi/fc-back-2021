@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser')
 const routes = require('./routes/index');
+const bodyParser = require('body-parser');
 require('dotenv');
 
 const app = express();
