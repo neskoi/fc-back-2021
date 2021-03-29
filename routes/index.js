@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const homeRoute = require("./homeRoute");
-const estimateRoute = require('./estimateRoute');
-const studentRoute = require("./studentRoute");
-const personRoute = require("./personRoute");
+const authMiddleware = require('./middlewares/auth')
+
 const userRoute = require("./userRoute");
+const personRoute = require("./personRoute");
+const bankRoute = require("./bankRoute");
+const stateRoute = require("./stateRoute");
 
 
-router.use(homeRoute)
-      .use(estimateRoute)
-      .use(studentRoute)
-      .use(userRoute)
-      .use(personRoute)
+router.use(userRoute)
+
+router.use(authMiddleware)
+router.use(personRoute)
+router.use(bankRoute)
+router.use(stateRoute)
+
+
+
 
 module.exports = router;
