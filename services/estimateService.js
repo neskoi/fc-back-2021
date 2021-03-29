@@ -1,10 +1,11 @@
 const estimateRepository = require('../repository/estimateRepository');
 const dateManager = require('../utils/dateManager');
+const stringResponser = require('../utils/stringResponser');
 
 class EstimateService {
     create = async (req, res) => {
-        const response = await estimateRepository.create({...req.body, img_orcamento_url: req.file.path,data_orcamento: dateManager.dateForDB()});
-        res.json(response);
+        await estimateRepository.create({...req.body, img_orcamento_url: req.file.path,data_orcamento: dateManager.dateForDB()});
+        res.json(stringResponser("Success"));
     };
 
     showOne = async (req, res) => {
@@ -18,8 +19,8 @@ class EstimateService {
     };
 
     purchaseProofInsertion = async (req, res) => {
-        const response = await estimateRepository.purchaseProofInsertion(req.params.id, {img_nota_url: req.file.path, data_nota: dateManager.dateForDB()});
-        res.json(response);
+        await estimateRepository.purchaseProofInsertion(req.params.id, {img_nota_url: req.file.path, data_nota: dateManager.dateForDB()});
+        res.json(stringResponser("Success"));
     };
 
 }
