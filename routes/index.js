@@ -1,19 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('./middlewares/auth')
 
-/*
-const nomeDaRota = require("caminhoParaFile");
-
-router.use(nomeDaRota)
-      .use(nomeDaRota)
-*/
-
-const homeRoute = require("./homeRoute");
 const userRoute = require("./userRoute");
 const personRoute = require("./personRoute");
+const bankRoute = require("./bankRoute");
+const stateRoute = require("./stateRoute");
 
-router.use(homeRoute)
+
 router.use(userRoute)
+
+router.use(authMiddleware)
 router.use(personRoute)
+router.use(bankRoute)
+router.use(stateRoute)
+
+
+
 
 module.exports = router;
