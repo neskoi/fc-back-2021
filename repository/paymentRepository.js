@@ -3,7 +3,6 @@ const db = require('../repository/db');
 class PaymentRepository{
 
     registerPayment = async (data) => {
-        console.log(data);
         return await db('pagamento').insert(data);
     };
 

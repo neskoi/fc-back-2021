@@ -6,11 +6,11 @@ class PaymentController {
     };
 
     selectAllPaymentFromPerson = (req, res) => {
-      
+      paymentService.selectAllPaymentFromPerson(req, res);
     };
 
     selectOnePayment = (req, res) => {
-        
+        paymentService.selectOnePayment(req, res);
     };
 }
 

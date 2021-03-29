@@ -5,7 +5,6 @@ const dateManager = require('../utils/dateManager');
 class PaymentService {
 
     registerPayment = async (req, res) => {
-        console.log({...req.body})
         try {
             await paymentRepository.registerPayment({...req.body, data_pagamento: dateManager.timestampForDB()});
             res.json(stringResponser("Success"));
@@ -16,8 +15,8 @@ class PaymentService {
 
     selectAllPaymentFromPerson = async (req, res) => {
        try {
-            await paymentRepository.selectAllPaymentFromPerson(req.body);
-            res.json(stringResponser("Success"));
+            const response = await paymentRepository.selectAllPaymentFromPerson({fk_pessoa_doador: req.params.id});
+            res.json(response);
         } catch (error) {
             res.json(stringResponser(error));
         }
@@ -25,8 +24,8 @@ class PaymentService {
 
     selectOnePayment = async (req, res) => {
         try {
-            await paymentRepository.selectOnePayment(req.body);
-            res.json(stringResponser("Success"));
+            const response = await paymentRepository.selectOnePayment({pk_pagamento: req.params.id});
+            res.json(response);
         } catch (error) {
             res.json(stringResponser(error));
         }
