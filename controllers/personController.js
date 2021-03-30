@@ -15,9 +15,11 @@ class personController{
     }
   }
 
-  async cadastrarPessoa(dataPessoa) {
+  async cadastrarPessoa(req, res) {
     try{
+      const dataPessoa = req.body
       console.log('CPF válido?', validaCPF(dataPessoa.cpf))
+
       if(validaCPF(dataPessoa.cpf)){
         const insert = await knexfile('pessoa').insert({
           fk_estado: dataPessoa.fk_estado,
@@ -29,16 +31,21 @@ class personController{
           agencia: dataPessoa.agencia,
           conta: dataPessoa.conta,
         })
-        console.log('Pessoa cadastrada com sucesso', insert)
-        return true
-      } else {
-        console.log('CPF Inválido!')
-        return false;
+       return res.status(200).json({
+        message: "Usuário cadastrado com sucesso!"
+      }) 
+       
       }
-    } catch (e) {
-      console.log('ERRO', e.message)
-      return false
+      }  catch (e) {
+      return res.status(400).json({
+        message: "Não foi possível cadastrar o usuário: " + e.message
+        })
+      }
+    
     }
-  }
-}
+
+    }
+
+ 
+
 module.exports = new personController()
