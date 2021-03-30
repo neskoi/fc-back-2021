@@ -5,6 +5,7 @@ const estimateRoute = require('../routes/estimateRoute');
 const studentRoute = require("./studentRoute");
 const personRoute = require("./personRoute");
 const userRoute = require("./userRoute");
+const schoolRoute = require("./schoolRoute");
 
 
 router.use(homeRoute)
@@ -12,5 +13,6 @@ router.use(homeRoute)
       .use(studentRoute)
       .use(userRoute)
       .use(personRoute)
+      .use(schoolRoute)
 
 module.exports = router;
