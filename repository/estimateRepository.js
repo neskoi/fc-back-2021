@@ -26,7 +26,7 @@ class EstimateRepository{
         }
     }
 
-    puchaseProofInsertion = async (id, data) => {
+    purchaseProofInsertion = async (id, data) => {
         
         try {
             return await this.updateEstimate(id, data);
@@ -45,12 +45,11 @@ class EstimateRepository{
 
     selectAllUnpaid = async () => {
         return await db(TABLE).where('data_nota', null).select('pk_orcamento','fk_filho','valor_total','img_orcamento_url','data_orcamento');
+         
     }
 
     updateEstimate = async (id, data) => {
-        const response = await db(TABLE).where('pk_orcamento', id).update(data);
-        console.log(response);
-        return response;
+        return await db(TABLE).where('pk_orcamento', id).update(data);
     }
 }
 

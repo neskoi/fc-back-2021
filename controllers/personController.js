@@ -22,6 +22,7 @@ class personController{
         const insert = await knexfile('pessoa').insert({
           fk_estado: dataPessoa.fk_estado,
           fk_banco: dataPessoa.fk_banco,
+          fk_usuario: dataPessoa.fk_usuario,
           nome: dataPessoa.nome,
           cpf: dataPessoa.cpf,
           rg: dataPessoa.rg,
