@@ -6,7 +6,7 @@ class studentController {
         try {
             const person_id = Number(req.params.id)
 
-            const { school, name, cpf, year } = req.body
+            const { school, name, cpf, year, description } = req.body
 
             const img_avatar_url = req.file.path
 
@@ -20,7 +20,7 @@ class studentController {
                 throw new Error
             }
 
-            await studentDatabase.postStudent(person_id, school, name, cpf, img_avatar_url, year)
+            await studentDatabase.postStudent(person_id, school, name, cpf, img_avatar_url, year, description)
             return res.status(200).send({message: "Student Created"})
         }
         catch(err) {
@@ -33,11 +33,11 @@ class studentController {
         try {
             const student_id = Number(req.params.id)
 
-            const { school, year } = req.body
+            const { school, year, description } = req.body
 
             const img_avatar_url = req.file.path
 
-            await studentDatabase.updateStudent(student_id, school, img_avatar_url, year)
+            await studentDatabase.updateStudent(student_id, school, img_avatar_url, year, description)
             return res.status(200).send({message: "Student Modified"})
         }
         catch(err) {
@@ -45,6 +45,29 @@ class studentController {
             return res.status(400).json({ message: "Error"})
         }
     }
+    
+    async getAll(req, res) {
+        try {
+            const result = await studentDatabase.getAll()
+            return res.status(200).send({result})
+        }
+        catch(err) {
+            console.log('error:', err)
+            return res.status(400).json({ message: "Error"})
+        }
+      }
+    
+      async getById(req, res) {
+        try {
+            const id = req.params.id
+            const result = await studentDatabase.getById(id)
+            return res.status(200).send({result})
+        }
+        catch(err) {
+            console.log('error:', err)
+            return res.status(400).json({ message: "Error"})
+        }
+      }
 }
 
 module.exports = new studentController();
