@@ -6,22 +6,11 @@ class studentDatabase {
     this.db = connection;
   }
   async postStudent(person_id, school, name, cpf, img_avatar_url, year) {
-
-    await db.raw(`
-      INSERT INTO ${TABLE_STUDENT} (fk_pessoa, fk_escola, nome, CPF, img_avatar_url, ano_escolar)
-      VALUES ("${person_id}", "${school}", "${name}", "${cpf}", "${img_avatar_url}", "${year}")
-    `);
-
+     await db(TABLE_STUDENT).insert({fk_pessoa:person_id, fk_escola: school, nome: name, cpf: cpf, img_avatar_url: img_avatar_url, ano_escolar: year});
   }
 
   async updateStudent(student_id, school, img_avatar_url, year) {
-
-    await db.raw(`
-      UPDATE ${TABLE_STUDENT}
-        SET fk_escola = "${school}" , img_avatar_url = "${img_avatar_url}", ano_escolar = "${year}"
-        WHERE pk_filho = "${student_id}"
-    `);
-
+    await db(TABLE_STUDENT).where({pk_filho: student_id}).update({fk_escola: school, img_avatar_url: img_avatar_url, ano_escolar: year})
   }
 }
 

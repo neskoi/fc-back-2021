@@ -11,7 +11,7 @@ const schoolRoute = require("./schoolRoute");
 const bankRoute = require("./bankRoute");
 const stateRoute = require("./stateRoute");
 
-router..use(estimateRoute)
+router.use(estimateRoute)
       .use(studentRoute)
       .use(userRoute)
       .use(authMiddleware)
