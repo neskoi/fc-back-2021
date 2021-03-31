@@ -1,5 +1,5 @@
 class DateManager{
-    date = new Date();
+    date = this.__update();
     day = this.date.getDate();
     month = this.date.getMonth() + 1;
     year = this.date.getUTCFullYear();
@@ -7,12 +7,18 @@ class DateManager{
     minutes = this.date.getMinutes();
     seconds = this.date.getSeconds();
 
+    __update(){
+        return new Date();
+    }
+
     dateForDB = () => {
+        this.__update();
         let todayDate = `${this.year}-${this.month}-${this.day}`;
         return todayDate;
     }
 
     timestampForDB = () => {
+        this.__update();
         let time = `${this.hours}:${this.minutes}:${this.seconds}`;
         return `${this.dateForDB()} ${time}`;
     }

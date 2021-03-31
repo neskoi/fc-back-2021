@@ -44,7 +44,7 @@ class EstimateRepository{
     }
 
     selectAllUnpaid = async () => {
-        return await db(TABLE).where('data_nota', null).select('pk_orcamento','fk_filho','valor_total','img_orcamento_url','data_orcamento');
+        return await db(TABLE).where('data_nota', null).select('pk_orcamento','fk_filho','valor_total','img_orcamento_url','data_orcamento', 'mensagem');
          
     }
 
