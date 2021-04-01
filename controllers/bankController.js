@@ -1,7 +1,9 @@
 const knexfile = require ('../repository/db.js')
 const select = knexfile('banco')
 
-async function buscarBanco() {
+
+class bankController{
+  async buscarBanco() {
     try {
       const bancos = await select
       console.log(bancos)
@@ -11,3 +13,5 @@ async function buscarBanco() {
       return []
     }
   }
+}
+module.exports = new bankController()

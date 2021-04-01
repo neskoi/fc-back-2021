@@ -1,6 +1,8 @@
+require('dotenv/config')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const knexfile = require ('../repository/db.js')
 const select = knexfile('usuario')
-const bcrypt = require('bcrypt');
 
 class userController {
   async buscarUser() {
@@ -14,37 +16,49 @@ class userController {
     }
   }
 
-  async cadastrarUser(dataUser) {
+  async cadastrarUser(req, res) {
     try{
-      console.log(dataUser)
-      const hash = bcrypt.hashSync(dataUser.password, 10);
-      console.log(hash)
+      const dataUser = req.body
+      const hash = dataUser.password ? bcrypt.hashSync(dataUser.password, 10) : null;
       const insert = await knexfile('usuario').insert({
-        email: dataUser.email,
+        email: dataUser.email || null,
         password: hash,
         data_cadastro: new Date(),
       })
-      console.log('Usuário Cadastrado com sucesso!', insert)
+      return res.status(200).json({
+        message: "Usuário cadastrado com sucesso!"
+      })
     } catch (e) {
-      console.log('insert erro', e.message)
+      return res.status(400).json({
+        message: "Não foi possível cadastrar o usuário: " + e.message
+      })
     }
   }
-  async login(dataUser){
+
+  async login(req, res) {
+    const dataUser = req.body
     try{
       const user = await knexfile('usuario').where('email', dataUser.email).first()
       if (user) {
         const match = await bcrypt.compare(dataUser.password, user.password);
-        console.log(match);
         if (match === true) {
-          console.log("usuário logado!")
-          return true
+          const token = jwt.sign({ pk_usuario: user.pk_usuario }, process.env.APP_JWT_SECRET)
+          const updateUser = await knexfile('usuario')
+            .where('pk_usuario', user.pk_usuario)
+            .update({
+              token: token,
+            })
+          return res.status(200).json({data: {
+            email: user.email,
+            token: token,
+          }})
         }
-        return false
+        return res.status(400).json({ message: "Senha Incorreta!" })
       }
-      return false
+      return res.status(400).json({ message: "Usuário não encontrado" })
     }
     catch (e) {
-      console.log('Erro Login');
+      return res.status(503).json({ message: "Não foi possível realizar o Login, tente novamente mais tarde!" })
       return false
     }
   }
