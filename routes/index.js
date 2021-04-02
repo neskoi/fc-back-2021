@@ -1,20 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+
+const estimateRoute = require("./estimateRoute");
+const studentRoute = require("./studentRoute");
+const userRoute = require("./userRoute");
 const authMiddleware = require('./middlewares/auth')
 const personRoute = require("./personRoute");
+const paymentRoute = require("./paymentRoute");
+const schoolRoute = require("./schoolRoute");
 const bankRoute = require("./bankRoute");
 const stateRoute = require("./stateRoute");
-const userRoute = require("./userRoute");
-const schoolRoute = require("./schoolRoute");
-const schoolRoute = require("./estimateRoute");
-const schoolRoute = require("./studentRoute");
 
 router.use(estimateRoute)
       .use(studentRoute)
       .use(userRoute)
-      .use(personRoute)
-      .use(schoolRoute)
       .use(authMiddleware)
+      .use(personRoute)
+      .use(paymentRoute)
+      .use(schoolRoute)
       .use(bankRoute)
       .use(stateRoute)
 
