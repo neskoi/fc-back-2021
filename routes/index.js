@@ -11,10 +11,10 @@ const schoolRoute = require("./schoolRoute");
 const bankRoute = require("./bankRoute");
 const stateRoute = require("./stateRoute");
 
-router.use(estimateRoute)
-      .use(studentRoute)
-      .use(userRoute)
+router.use(userRoute)
       .use(authMiddleware)
+      .use(estimateRoute)
+      .use(studentRoute)
       .use(personRoute)
       .use(paymentRoute)
       .use(schoolRoute)
