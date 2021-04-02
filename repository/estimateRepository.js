@@ -45,7 +45,6 @@ class EstimateRepository{
 
     selectAllUnpaid = async () => {
         return await db.select('*').from(TABLE).join('filho', {'filho.pk_filho': `${TABLE}.fk_filho`}).join('escola', {'escola.pk_escola': `filho.fk_escola`});
-         
     }
 
     updateEstimate = async (id, data) => {
