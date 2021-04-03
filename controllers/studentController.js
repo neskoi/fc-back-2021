@@ -4,7 +4,7 @@ const validaCPF = require('../utils/validaCPF')
 class studentController {
     async create(req, res) {
         try {
-            const person_id = Number(req.params.id)
+            const user = req.params.id
 
             const { school, name, cpf, year, description } = req.body
 
@@ -20,7 +20,7 @@ class studentController {
                 throw new Error
             }
 
-            await studentDatabase.postStudent(person_id, school, name, cpf, img_avatar_url, year, description)
+            await studentDatabase.postStudent(user, school, name, cpf, img_avatar_url, year, description)
             return res.status(200).send({message: "Student Created"})
         }
         catch(err) {
@@ -46,9 +46,10 @@ class studentController {
         }
     }
     
-    async getAll(req, res) {
+    async getAllByPerson(req, res) {
         try {
-            const result = await studentDatabase.getAll()
+            const email = req.params.id
+            const result = await studentDatabase.getAllByPerson(email)
             return res.status(200).send({result})
         }
         catch(err) {

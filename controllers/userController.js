@@ -37,12 +37,16 @@ class userController {
 
   async login(req, res) {
     const dataUser = req.body
-    try{
+    try{ 
       const user = await knexfile('usuario').where('email', dataUser.email).first()
+      console.log(user)
+      console.log(dataUser)
       if (user) {
         const match = await bcrypt.compare(dataUser.password, user.password);
+        console.log(match)
         if (match === true) {
           const token = jwt.sign({ pk_usuario: user.pk_usuario }, process.env.APP_JWT_SECRET)
+          console.log(token)
           const updateUser = await knexfile('usuario')
             .where('pk_usuario', user.pk_usuario)
             .update({
@@ -58,6 +62,7 @@ class userController {
       return res.status(400).json({ message: "Usuário não encontrado" })
     }
     catch (e) {
+      console.log(e.message)
       return res.status(503).json({ message: "Não foi possível realizar o Login, tente novamente mais tarde!" })
       return false
     }
