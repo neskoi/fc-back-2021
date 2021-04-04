@@ -10,14 +10,12 @@ class studentDatabase {
     this.db = connection;
   }
   async postStudent(user, school, name, cpf, img_avatar_url, year, description) {
-     const person = await db.raw(`
-        SELECT filho.fk_pessoa FROM ${TABLE_STUDENT} filho
-        LEFT JOIN ${TABLE_SCHOOL} escola ON escola.pk_escola = filho.fk_escola
-        LEFT JOIN ${TABLE_PERSON} pessoa ON pessoa.pk_pessoa = filho.fk_pessoa
-        LEFT JOIN ${TABLE_USER} usuario ON usuario.pk_usuario = pessoa.fk_usuario
-        WHERE usuario.email="${user}";
-     `) 
-     const person_id = person[0][0].fk_pessoa
+    const person = await db.raw(`
+        SELECT pessoa.pk_pessoa FROM pessoa 
+        INNER JOIN usuario ON usuario.pk_usuario = pessoa.fk_usuario 
+        WHERE usuario.email = '${user}'
+     `) ;
+     const person_id = person[0][0].pk_pessoa;
      await db(TABLE_STUDENT).insert({fk_pessoa:person_id, fk_escola: school, nome: name, cpf: cpf, img_avatar_url: img_avatar_url, ano_escolar: year, historia: description});
   }
 
