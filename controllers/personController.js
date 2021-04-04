@@ -23,6 +23,7 @@ class personController{
       const [, token] = authorization.split(' ')
       const decoded = await promisify(jwt.verify)(token, process.env.APP_JWT_SECRET)
       const pk_usuario = decoded.pk_usuario
+
       if(validaCPF(dataPessoa.cpf)){
         const insert = await knexfile('pessoa').insert({
           fk_estado: dataPessoa.fk_estado,
@@ -34,6 +35,7 @@ class personController{
           agencia: dataPessoa.agencia,
           conta: dataPessoa.conta,
         })
+
         return res.status(200).json({
           message: "Usuário cadastrado com sucesso!"
         }) 
