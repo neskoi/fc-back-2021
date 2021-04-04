@@ -20,6 +20,7 @@ class personController{
     try{
       const dataPessoa = req.body
       const { authorization } = req.headers
+
       const [, token] = authorization.split(' ')
       const decoded = await promisify(jwt.verify)(token, process.env.APP_JWT_SECRET)
       const pk_usuario = decoded.pk_usuario
