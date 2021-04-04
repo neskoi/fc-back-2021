@@ -16,6 +16,18 @@ class personController{
     }
   }
 
+
+
+  async buscarPessoaPorIdUsuario(email) {
+    try {
+      const data = await knexfile.select('pk_pessoa').from('pessoa').innerJoin('usuario', 'usuario.pk_usuario', 'pessoa.fk_usuario').where({email: email});
+      return data
+    }catch (e) {
+      console.log(e.message)
+      return []
+    }
+  }
+
   async cadastrarPessoa(req, res) {
     try{
       const dataPessoa = req.body

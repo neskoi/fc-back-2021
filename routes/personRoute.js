@@ -16,5 +16,14 @@ router.post(
       })
     },
   );
+
+  router.get(
+    '/pessoa/existe/:email',
+    (req, res) => {
+      personController.buscarPessoaPorIdUsuario(req.params.email).then(result => {
+        return res.status(200).json({ "data": result })
+      })
+    },
+  );
   
   module.exports = router;
