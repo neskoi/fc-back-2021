@@ -12,7 +12,7 @@ const bankRoute = require("./bankRoute");
 const stateRoute = require("./stateRoute");
 
 router.use(userRoute)
-      .use(authMiddleware)
+      //.use(authMiddleware)
       .use(estimateRoute)
       .use(studentRoute)
       .use(personRoute)
