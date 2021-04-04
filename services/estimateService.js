@@ -4,7 +4,7 @@ const stringResponser = require('../utils/stringResponser');
 
 class EstimateService {
     create = async (req, res) => {
-        await estimateRepository.create({...req.body, img_orcamento_url: req.file.path,data_orcamento: dateManager.dateForDB()});
+        await estimateRepository.create({...req.body, img_orcamento_url: req.file.path});
         res.json(stringResponser("Success"));
     };
 
@@ -19,7 +19,7 @@ class EstimateService {
     };
 
     purchaseProofInsertion = async (req, res) => {
-        await estimateRepository.purchaseProofInsertion(req.params.id, {img_nota_url: req.file.path, data_nota: dateManager.dateForDB()});
+        await estimateRepository.purchaseProofInsertion(req.params.id, {img_nota_url: req.file.path});
         res.json(stringResponser("Success"));
     };
 
