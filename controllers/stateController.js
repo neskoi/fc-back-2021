@@ -6,7 +6,6 @@ class stateController{
   async buscarEstados() {
     try {
       const estados = await select
-      console.log(estados)
       return estados
     }catch (e) {
       console.log(e.message)
