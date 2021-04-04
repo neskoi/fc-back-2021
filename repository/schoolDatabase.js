@@ -10,6 +10,7 @@ class schoolDatabase {
 
     const result = await db.raw(`
       SELECT * FROM ${TABLE_SCHOOL}
+      LIMIT 50
     `);
 
     return result[0]
@@ -20,6 +21,7 @@ class schoolDatabase {
     const result = await db.raw(`
       SELECT * FROM ${TABLE_SCHOOL}
       WHERE pk_escola=${school_id}
+      LIMIT 50
     `);
 
     return result[0]
@@ -30,6 +32,7 @@ class schoolDatabase {
     const result = await db.raw(`
       SELECT * FROM ${TABLE_SCHOOL}
       WHERE fk_estado=${state_id}
+      LIMIT 50
     `);
 
     return result[0]
