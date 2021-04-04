@@ -6,7 +6,6 @@ class bankController{
   async buscarBanco() {
     try {
       const bancos = await select
-      console.log(bancos)
       return bancos
     }catch (e) {
       console.log(e.message)
